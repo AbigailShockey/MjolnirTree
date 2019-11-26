@@ -45,7 +45,7 @@ def boostrapSupport(out)
   inputtrees = os.path.join(out,"trees")
   inputconsensus = os.path.join(out,"consensus")
   supportpath = os.path.join(out,"bootstrapSupport")
-  checkexists(consensuspath)
+  checkexists(supportpath)
 
   # setup command
   cmd = f'bash -c \"sumtrees.py -d0 -p -o /output/mrc95_boostrapSupport.tree -t /data/mrc95.tree /data/bootstrapped_nj_trees.newick\"'
