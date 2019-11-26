@@ -11,7 +11,7 @@ from app.mjolnr import mjolnr
 def handler(sig,frame):
     print('\nShutting down the running docker containers and exiting...')
     client = docker.from_env()
-    container_list = client.containers.list(filters={"label":"prog=mjolnr"})
+    container_list = client.containers.list(filters={"label":"prog=mjolnir"})
     for container in container_list:
         print("shutting down container: ",container.name)
         container.kill()
