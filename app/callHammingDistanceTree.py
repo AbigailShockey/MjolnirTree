@@ -11,7 +11,7 @@ def checkexists(path):
     else:
         return True
         
-def callHammingDistanceTree(tsvfile, out, transpose, boot):
+def hammingDistanceTree(tsvfile, out, transpose, boot):
     treespath = os.path.join(out,"trees")
     checkexists(treespath)
     # setup command
