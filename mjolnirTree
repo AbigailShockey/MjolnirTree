@@ -5,7 +5,7 @@ import docker
 import signal
 
 #local libraries
-from app.mjolnr import mjolnr
+from app.mjolnir import mjolnir
 
 #setup signal handler
 def handler(sig,frame):
