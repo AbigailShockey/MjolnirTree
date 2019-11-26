@@ -28,10 +28,10 @@ class ArgParser(argparse.ArgumentParser):
 # determine command line arguments and get path
 parser = ArgParser(description='Calculate pairwise hamming distance matrix from gene prensece/absence matrix and create nj tree')
 parser.add_argument('tsv', type=str, help="Binary gene presence and absence file (tab delimited)")
-parser.add_argument('-o', metavar='output', type=str, help="output directory - defaults to working directory")
-parser.add_argument('prefix', type=str, default="output", nargs='?', help="Output prefix, defaults to 'output'")
+parser.add_argument('-o', metavar='output', type=str, help="Output directory - defaults to working directory")
+parser.add_argument('prefix', type=str, default="output", nargs='?', help="Output prefix - defaults to 'output'")
 parser.add_argument('-t', action="store_true", required=False, help="Transpose tsv")
-parser.add_argument('boot', type=int, default=0, nargs='?', help="Perform boostrapping n times, defaults to '0")
+parser.add_argument('boot', type=int, default=0, nargs='?', help="Perform boostrapping n times - defaults to '0")
 
 args = parser.parse_args()
 
@@ -49,4 +49,4 @@ if args.t == True:
 else:
     transpose = "False"
 
-mjolnr(tsvfile, out, prefix, transpose, args.boot)
+mjolnir(tsvfile, out, prefix, transpose, args.boot)
