@@ -12,14 +12,25 @@ def checkexists(path):
         return True
         
 def callHammingDistanceTree(tsvfile, out, prefix, transpose, boot):
-    logfile = os.path.join(out,'mjolnir.log')
-    resultspath = os.path.join(out,"results")
-    checkexists(resultspath)
+    treespath = os.path.join(out,"trees")
+    checkexists(treespath)
     # setup command
     cmd = f'bash -c \"hammingDistanceTree.py {tsv} {prefix} {transpose} {boot}\"'
     # denote logs
     with open(logfile,'a') as outlog:
         outlog.write('***********\n')
-        outlog.write('Calculating hamming distance matrix and tree\n')
-        results = cd.call('ashockey/mjolnir:latest',cmd,'/data',{outdir:"/data"})
+        outlog.write(f'Calculating hamming distance tree and boostrapping {boot} times\n')
+        results = cd.call('ashockey/mjolnir:latest',cmd,'/data',{out:"/data",treespath:"/output"})
         outlog.write('***********\n')
+
+def consensusTree(out)
+  inputpath = os.path.join(out,"trees")
+  consensuspath = os.path.join(out,"consensus")
+  checkexists(consensuspath)
+  # setup command
+  cmd = f'bash -c \"sumtrees.py -s consensus -o phylo-mle-support.sumtrees -f0.95 --p --d0 {inputpath}/bootstrapped_nj_trees.newick\"'
+  with open(logfile,'a') as outlog:
+      outlog.write('***********\n')
+      outlog.write('Calculating consensus tree\n')
+      results = cd.call('ashockey/mjolnir:latest',cmd,'/data',{input_path:"/data",consensuspath:"/output"})
+      outlog.write('***********\n')
