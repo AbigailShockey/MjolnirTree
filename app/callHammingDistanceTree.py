@@ -1,7 +1,7 @@
 #!/usr/bin/env python 3
 
 import os,sys
-import app.calldocker as cd
+import app.callDocker as cd
 
 def checkexists(path):
     path = os.path.abspath(path)
