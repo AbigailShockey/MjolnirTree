@@ -11,11 +11,11 @@ def checkexists(path):
     else:
         return True
         
-def callHammingDistanceTree(tsvfile, out, prefix, transpose, boot):
+def callHammingDistanceTree(tsvfile, out, transpose, boot):
     treespath = os.path.join(out,"trees")
     checkexists(treespath)
     # setup command
-    cmd = f'bash -c \"hammingDistanceTree.py {tsv} {prefix} {transpose} {boot}\"'
+    cmd = f'bash -c \"hammingDistanceTree.py {tsv} {transpose} {boot}\"'
     # denote logs
     with open(logfile,'a') as outlog:
         outlog.write('***********\n')
