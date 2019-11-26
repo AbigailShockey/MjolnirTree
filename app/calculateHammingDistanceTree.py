@@ -57,8 +57,8 @@ def boostrapSupport(out)
         
 # ------------------------------------------------------
 
-def calculateHammingDistanceTree(tsvfile, out, prefix, transpose, boot):
-    hammingDistanceTree(tsvfile, out, prefix, transpose, boot)
+def calculateHammingDistanceTree(tsvfile, out, transpose, boot):
+    hammingDistanceTree(tsvfile, out, transpose, boot)
     if boot != 0:
         consensusTree(out)
         boostrapSupport(out)
