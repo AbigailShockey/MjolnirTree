@@ -54,3 +54,13 @@ def boostrapSupport(out)
       outlog.write('Calculating support for nodes in the consensus tree\n')
       results = cd.call('ashockey/mjolnir:latest',cmd,'/data',{inputtrees:inputconsensus:"/data",supportpath:"/output"})
       outlog.write('***********\n')
+        
+# ------------------------------------------------------
+
+def calculateHammingDistanceTree(tsvfile, out, prefix, transpose, boot):
+    hammingDistanceTree(tsvfile, out, prefix, transpose, boot)
+    if boot != 0:
+        consensusTree(out)
+        boostrapSupport(out)
+    if boot == 0:
+        continue
