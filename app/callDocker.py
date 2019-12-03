@@ -1,6 +1,7 @@
 # author: Kelsey Florek
 # email: kelsey.florek@slh.wisc.edu
 # stripped down docker calling function
+#!/usr/bin/env python 3
 
 import docker
 import os, sys
