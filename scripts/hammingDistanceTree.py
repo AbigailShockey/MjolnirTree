@@ -1,4 +1,4 @@
-#!/usr/bin/env python 3
+#!/usr/bin/python3
 
 import os,sys
 import argparse
@@ -85,7 +85,7 @@ if args.boot != 0:
     trees = dendropy.TreeList()
 
     # begin bootstrapping
-    for i in range(1,(args.b + 1)):
+    for i in range(1,(args.boot + 1)):
         # randomly sample tsv columns with replacement
         rcols = np.random.choice(list(df.columns.values),len(list(df.columns.values)), replace=True)
         rdf = df[rcols]
