@@ -59,7 +59,6 @@ pd.options.display.max_rows = 10
 pd.options.display.max_columns = 5
 
 tsvfile = os.path.abspath(args.tsv)
-prefix = args.prefix
 out = args.out
 
 # read gene presence/absence tsv, treating first column as rownames and first row as column names
