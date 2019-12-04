@@ -16,8 +16,8 @@ required arguments:
 
 optional arguments:
   -h, --help  show this help message and exit
-  -o,   output directory, defaults to working directory
-  -t,   transpose tsv
+  -o   output directory, defaults to working directory
+  -t   transpose tsv
   boot  bootstrap tsv n times, defaults to 0
 ```
 ### Dependencies
