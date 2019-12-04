@@ -4,7 +4,6 @@
 # email: abigail.shockey@slh.wisc.edu
 # Calculate hamming distance matrix, neighbor-joining tree, bootstrap, consensus tree and boostrap support values
 
-
 import os,sys
 import app.callDocker as cd
 import subprocess as sub
