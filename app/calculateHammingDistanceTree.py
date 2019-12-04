@@ -40,7 +40,7 @@ def hammingDistanceTree(tsvfile, out, transpose, boot):
     
 def consensusTree(out):
   logfile = os.path.join(out,'consensus.log')
-  inputpath = os.path.join(out,"hammingDistance")
+  inputpath = os.path.join(out,"distanceTrees")
   consensuspath = os.path.join(out,"consensusTree")
   checkexists(consensuspath)
 
