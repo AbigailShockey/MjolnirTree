@@ -18,10 +18,6 @@ RUN apt-get update && apt-get install -y wget \
   python3-biopython \
   python3-pip
 
-
-# RUN wget https://repo.anaconda.com/archive/Anaconda3-2019.10-Linux-x86_64.sh && \
-#  bash Anaconda3-2019.10-Linux-x86_64.sh -b -p ./anaconda
-
 RUN python3 -m pip install -U dendropy pandas scipy numpy docker
 
 RUN mkdir scripts
