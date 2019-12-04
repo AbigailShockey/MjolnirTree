@@ -8,7 +8,7 @@ import docker
 import signal
 
 # local libraries
-from app.calculateHammingDistanceTree import calculateHammingDistanceTree
+from app.calculateHammingDistanceTrees import calculateHammingDistanceTree
 
 # setup signal handler
 def handler(sig,frame):
