@@ -1,4 +1,7 @@
-#!/usr/bin/env python 3
+#!/usr/bin python 3
+
+# author: Abigail Shockey
+# email: abigail.shockey@slh.wisc.edu
 
 import sys, os, argparse
 import docker
