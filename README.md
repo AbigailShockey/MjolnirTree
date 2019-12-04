@@ -1,6 +1,6 @@
 ## MjolnirTree
 
-MjolnirTree constructs a neigbor-joining tree using hamming distances calculated from a binary gene presence/absence matrix. MjolnirTree uses a Docker container to maintain stability, reproducibility, portability and ease of use by keeping its dependencies in controlled environments.
+MjolnirTree constructs a neigbor-joining tree using Hamming distance calculated from a binary gene presence/absence matrix. MjolnirTree uses a Docker container to maintain stability, reproducibility, portability and ease of use by keeping its dependencies in controlled environments.
 
 #### Using MjolnirTree
 
@@ -20,3 +20,15 @@ optional arguments:
   -t,   transpose tsv
   boot, bootstrap tsv n times, defaults to 0
 ```
+
+#### Why name it MjolnirTree?
+
+The Hamming in Hamming distance sounds close to hammer. In Norse mythology, Mjolnir is the hammer of Thor, the Norse god of thunder. Hamming distances are used to produce the neighbor-joining tree, hence MjolnirTree.
+
+#### License
+
+[GPLv3](https://github.com/AbigailShockey/MjolnirTree/blob/master/LICENSE)
+
+#### Author
+
+Abigail C. Shockey
