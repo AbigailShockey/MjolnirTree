@@ -9,8 +9,8 @@ The input to MjolnirTree is a binary gene presence/absence matrix. This matrix s
 ```
 usage: MjolnirTree [-h] tsv [options]
 
-construct a neigbor-joining tree using hamming distances calculated from a binary \
-gene presence/absence matrix
+construct a neigbor-joining tree using hamming distances calculated from a \
+  binary gene presence/absence matrix
 
 required arguments:
   tsv   binary gene presence/absence matrix [isolates x genes], tab-delimited
