@@ -1,7 +1,9 @@
+#!/usr/bin/env python 3
+
 # author: Abigail Shockey
 # email: abigail.shockey@slh.wisc.edu
 # Calculate hamming distance matrix, neighbor-joining tree, bootstrap, consensus tree and boostrap support values
-#!/usr/bin/env python 3
+
 
 import os,sys
 import app.callDocker as cd
