@@ -24,7 +24,7 @@ def hammingDistanceTree(tsvfile, out, transpose, boot):
   checkexists(distancepath)
 
   # setup command
-  cmd = f'bash -c \"mjlonir_test.py /data/{tsv} /output/ {boot} {transpose}\"'
+  cmd = f'bash -c \"hammingDistanceTrees.py /data/{tsv} /output/ {transpose} {boot}\"'
   print(cmd)
   # denote logs
   with open(logfile,'a') as outlog:
