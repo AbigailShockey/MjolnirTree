@@ -5,8 +5,8 @@ FROM ubuntu:bionic
 LABEL base.image="ubuntu:bionic"
 LABEL version="1"
 LABEL software="MjolnirTree"
-LABEL description="Dependencies for MjolnirTree"
-LABEL website="https://github.com/AbigailShockey/MjolnirTree"
+LABEL description="MjolnirTree dependencies"
+LABEL website="https://github.com/AbigailShockey/MjolnirTree/"
 LABEL license="https://github.com/AbigailShockey/MjolnirTree/blob/master/LICENSE"
 LABEL maintainer="Abigail Shockey"
 LABEL maintainer.email="abigail.shockey@slh.wisc.edu"
@@ -22,9 +22,9 @@ RUN python3 -m pip install -U dendropy pandas scipy numpy docker
 
 RUN mkdir scripts
 
-RUN wget https://github.com/AbigailShockey/MjolnirTree/blob/master/scripts/hammingDistanceTrees.py
-RUN mv hammingDistanceTrees.py scripts/ && \
-chmod +x scripts/hammingDistanceTrees.py
+RUN wget https://raw.githubusercontent.com/AbigailShockey/MjolnirTree/master/scripts/hammingDistanceTrees.py && \
+  mv hammingDistanceTrees.py scripts/ && \
+  chmod +x scripts/hammingDistanceTrees.py
 
 ENV PATH="${PATH}:/scripts"
 
