@@ -18,7 +18,7 @@ optional arguments:
   -h, --help  show this help message and exit
   -o,   output directory, defaults to working directory
   -t,   transpose tsv
-  boot, bootstrap tsv n times, defaults to 0
+  boot  bootstrap tsv n times, defaults to 0
 ```
 ### Dependencies
 MjolnirTree's dependencies are packaged in a [Docker container](https://hub.docker.com/repository/docker/ashockey/mjolnir-tree). MjolnirTree calls Docker using [Docker SDK for Python](https://pypi.org/project/docker/). Matrix manipulation and boostrapping is performed using [pandas](https://pandas.pydata.org/) and [NumPy](https://numpy.org/). Hamming distance is calculated using [SciPy](https://www.scipy.org/). Trees are constructed and boostrap support is calculated using [DendroPy](https://dendropy.org/).
