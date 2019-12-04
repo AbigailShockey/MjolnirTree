@@ -36,8 +36,7 @@ def hammingDistanceTree(tsvfile, out, transpose, boot):
   sub.Popen(cmd).wait()
   cmd = shlex.split(f"cp {distancepath}/hamming_distance_matrix.tsv {out}")
   sub.Popen(cmd).wait()
-
-
+    
 def consensusTree(out):
   logfile = os.path.join(out,'consensus.log')
   inputpath = os.path.join(out,"hammingDistance")
@@ -70,8 +69,6 @@ def boostrapSupport(out):
       outlog.write('***********\n')
   cmd = shlex.split(f"cp {supportpath}/mrc95_boostrapSupport.tree {out}")
   sub.Popen(cmd).wait()
-
-# ------------------------------------------------------
 
 def calculateHammingDistanceTree(tsvfile, out, transpose, boot):
     hammingDistanceTree(tsvfile, out, transpose, boot)
