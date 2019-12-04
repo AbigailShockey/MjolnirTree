@@ -24,8 +24,8 @@ class ArgParser(argparse.ArgumentParser):
 parser = ArgParser(description='Calculate pairwise hamming distance matrix from gene prensece/absence matrix and create nj tree')
 parser.add_argument('tsv', type=str, help="Binary gene presence and absence file (tab delimited)")
 parser.add_argument('out', type=str, help="Output directory")
-parser.add_argument('boot', type=int, help="Perform boostrapping n times")
 parser.add_argument('transpose', type=str, help="Transpose tsv")
+parser.add_argument('boot', type=int, help="Perform boostrapping n times")
 
 args = parser.parse_args()
 
