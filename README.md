@@ -7,7 +7,7 @@ MjolnirTree constructs a neigbor-joining tree using Hamming distance calculated 
 The input to MjolnirTree is a binary gene presence/absence matrix e.g. the output of pan-genome pipelines like [Roary](https://sanger-pathogens.github.io/Roary/). This matrix should be a tab-delimited file, with isolates as rows and genes as columns (isolates x genes). MjolnirTree has the option to transpose a matrix in the reverse orientation (genes x isolates). Boostrapping of the resulting neighbor-joining tree can be performed, which outputs a 95% majority-rule consensus tree with node support reported as percentages rounded to integers.
 
 ```
-usage: ./mjolnirTree [-h] tsv [options]
+usage: ./mjolnirTree [-h] [-o output] [-t] tsv [boot]
 
 construct a neigbor-joining tree using a binary gene presence/absence matrix
 
