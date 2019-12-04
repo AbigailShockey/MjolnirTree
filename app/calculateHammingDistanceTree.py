@@ -1,4 +1,4 @@
-#!/usr/bin/env python 3
+#!/usr/bin/python3
 
 import os,sys
 import app.callDocker as cd
@@ -17,27 +17,29 @@ def hammingDistanceTree(tsvfile, out, transpose, boot):
   logfile = os.path.join(out,'hdt.log')
   inputpath = os.path.dirname(tsvfile)
   tsv = os.path.basename(tsvfile)
-  treespath = os.path.join(out,"distanceTrees")
-  checkexists(treespath)
+  distancepath = os.path.join(out,"hammingDistance")
+  checkexists(distancepath)
 
   # setup command
-  cmd = f'bash -c \"mjlonir_test.py /data/{tsv} /output/ {boot} {transpose}\"'
+  cmd = f'bash -c \"hammingDistanceTrees.py /data/{tsv} /output/ {transpose} {boot}\"'
   print(cmd)
   # denote logs
   with open(logfile,'a') as outlog:
       outlog.write('***********\n')
       outlog.write(f'Calculating hamming distance tree and boostrapping {boot} times\n')
-      results = cd.call('ashockey/mjolnir:latest',cmd,'/data',{inputpath:"/data",treespath:"/output"})
+      results = cd.call('ashockey/mjolnir:latest',cmd,'/data',{inputpath:"/data",distancepath:"/output"})
       outlog.write('***********\n')
-  cmd = shlex.split(f"cp {treespath}/bootstrapped_nj_trees.newick {out}")
+  cmd = shlex.split(f"cp {distancepath}/hamming_distance_matrix.tsv {out}")
   sub.Popen(cmd).wait()
-  cmd = shlex.split(f"cp {treespath}/hamming_distance_matrix.tsv {out}")
-  sub.Popen(cmd).wait()
+  if boot != 0:
+      cmd = shlex.split(f"cp {distancepath}/bootstrapped_nj_trees.newick {out}")
+      sub.Popen(cmd).wait()
+
 
 
 def consensusTree(out):
   logfile = os.path.join(out,'consensus.log')
-  inputpath = os.path.join(out,"distanceTrees")
+  inputpath = os.path.join(out,"hammingDistance")
   consensuspath = os.path.join(out,"consensusTree")
   checkexists(consensuspath)
 

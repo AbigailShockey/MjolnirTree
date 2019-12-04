@@ -1,16 +1,13 @@
-#!/usr/bin/python3
-
-# author: Abigail Shockey
-# email: abigail.shockey@slh.wisc.edu
+#!/usr/bin/env python3
 
 import sys, os, argparse
 import docker
 import signal
 
-# local libraries
+#local libraries
 from app.calculateHammingDistanceTree import calculateHammingDistanceTree
 
-# setup signal handler
+#setup signal handler
 def handler(sig,frame):
     print('\nShutting down the running docker containers and exiting...')
     client = docker.from_env()
@@ -37,7 +34,7 @@ parser.add_argument('boot', type=int, default=0, nargs='?', help="Perform boostr
 
 args = parser.parse_args()
 
-# get current working dir if output is empty
+#get current working dir if output is empty
 try:
     out = os.path.abspath(args.o)
 except (AttributeError, TypeError) as err:
