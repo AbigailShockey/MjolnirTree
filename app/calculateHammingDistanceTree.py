@@ -22,7 +22,7 @@ def hammingDistanceTree(tsvfile, out, transpose, boot):
 
   # setup command
   cmd = f'bash -c \"hammingDistanceTrees.py /data/{tsv} /output/ {transpose} {boot}\"'
-  print(cmd)
+ 
   # denote logs
   with open(logfile,'a') as outlog:
       outlog.write('***********\n')
