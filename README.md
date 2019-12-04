@@ -4,7 +4,7 @@ MjolnirTree constructs a neigbor-joining tree using hamming distances calculated
 
 #### MjolnirTree
 
-The input to MjolnirTree is a binary gene presence/absence matrix. This matrix should be a tab-delimited file, with isolates as rows and genes as columns (isolates x genes). MjolnirTree has the option (-t) to transpose a matrix in the reverse orientation (genes x isolates). Boostrapping of the resulting neighbor-joining tree can be performed using the boot option.
+The input to MjolnirTree is a binary gene presence/absence matrix. This matrix should be a tab-delimited file, with isolates as rows and genes as columns (isolates x genes). MjolnirTree has the option (-t) to transpose a matrix in the reverse orientation (genes x isolates). Boostrapping of the resulting neighbor-joining tree can be performed using the boot option, which outputs a 95% majority-rule consensus tree with node support reported as percentages rounded to integers.
 
 ```
 usage: MjolnirTree [-h] tsv [options]
@@ -17,6 +17,6 @@ required arguments:
 optional arguments:
   -h, --help  show this help message and exit
   -o,   output directory, defaults to working directory
-  -t,   transpose, transpose tsv
-  boot, bootstrap, bootstrap tsv n times
+  -t,   transpose tsv
+  boot, bootstrap tsv n times, defaults to 0
 ```
