@@ -109,6 +109,4 @@ if args.boot != 0:
         trees.append(rnj_tree)
 
     # write all permuted nj trees to file
-    trees.write(
-        path=os.path.join(out,"bootstrapped_nj_trees.newick"),
-        schema="newick")
+    trees.write(path=os.path.join(out,"bootstrapped_nj_trees.newick"), schema="newick")
