@@ -21,7 +21,7 @@ optional arguments:
   boot, bootstrap tsv n times, defaults to 0
 ```
 ### Depenencies
-MjolnirTree's dependencies are packaged in a [Docker container](https://github.com/AbigailShockey/MjolnirTree/blob/master/docker/Dockerfile). Matrix manipulation and boostrapping is performed using [pandas](https://pandas.pydata.org/) and [NumPy](https://numpy.org/). Hamming distance is calculated using [SciPy](https://www.scipy.org/). Trees are constructed and boostrap support is calculated using [DendroPy](https://dendropy.org/)
+MjolnirTree's dependencies are packaged in a [Docker container](https://github.com/AbigailShockey/MjolnirTree/blob/master/docker/Dockerfile). Matrix manipulation and boostrapping is performed using [pandas](https://pandas.pydata.org/) and [NumPy](https://numpy.org/). Hamming distance is calculated using [SciPy](https://www.scipy.org/). Trees are constructed and boostrap support is calculated using [DendroPy](https://dendropy.org/).
 
 ### Why name it MjolnirTree?
 
