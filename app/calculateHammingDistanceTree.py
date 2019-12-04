@@ -21,21 +21,21 @@ def hammingDistanceTree(tsvfile, out, transpose, boot):
   logfile = os.path.join(out,'hdt.log')
   inputpath = os.path.dirname(tsvfile)
   tsv = os.path.basename(tsvfile)
-  distancepath = os.path.join(out,"hammingDistance")
-  checkexists(distancepath)
+  treespath = os.path.join(out,"distanceTrees")
 
   # setup command
-  cmd = f'bash -c \"hammingDistanceTrees.py /data/{tsv} /output/ {transpose} {boot}\"'
+  cmd = f'bash -c \"mjlonir_test.py /data/{tsv} /output/ {transpose} {boot}\"'
   print(cmd)
   # denote logs
-  with open(logfile,'a') as outlog:
+  # denote logs
+ with open(logfile,'a') as outlog:
       outlog.write('***********\n')
       outlog.write(f'Calculating hamming distance tree and boostrapping {boot} times\n')
-      results = cd.call('ashockey/mjolnir:latest',cmd,'/data',{inputpath:"/data",distancepath:"/output"})
+      results = cd.call('ashockey/mjolnir:latest',cmd,'/data',{inputpath:"/data",treespath:"/output"})
       outlog.write('***********\n')
-  cmd = shlex.split(f"cp {distancepath}/bootstrapped_nj_trees.newick {out}")
+  cmd = shlex.split(f"cp {treespath}/bootstrapped_nj_trees.newick {out}")
   sub.Popen(cmd).wait()
-  cmd = shlex.split(f"cp {distancepath}/hamming_distance_matrix.tsv {out}")
+  cmd = shlex.split(f"cp {treespath}/hamming_distance_matrix.tsv {out}")
   sub.Popen(cmd).wait()
     
 def consensusTree(out):
