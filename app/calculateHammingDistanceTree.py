@@ -1,9 +1,5 @@
 #!/usr/bin/env python 3
 
-# author: Abigail Shockey
-# email: abigail.shockey@slh.wisc.edu
-# Calculate hamming distance matrix, neighbor-joining tree, bootstrap, consensus tree and boostrap support values
-
 import os,sys
 import app.callDocker as cd
 import subprocess as sub
@@ -22,21 +18,23 @@ def hammingDistanceTree(tsvfile, out, transpose, boot):
   inputpath = os.path.dirname(tsvfile)
   tsv = os.path.basename(tsvfile)
   treespath = os.path.join(out,"distanceTrees")
+  checkexists(treespath)
 
   # setup command
-  cmd = f'bash -c \"hammingDistanceTrees.py /data/{tsv} /output/ {transpose} {boot}\"'
+  cmd = f'bash -c \"mjlonir_test.py /data/{tsv} /output/ {boot} {transpose}\"'
   print(cmd)
   # denote logs
   with open(logfile,'a') as outlog:
-    outlog.write('***********\n')
-    outlog.write(f'Calculating hamming distance tree and boostrapping {boot} times\n')
-    results = cd.call('ashockey/mjolnir:latest',cmd,'/data',{inputpath:"/data",treespath:"/output"})
-    outlog.write('***********\n')
+      outlog.write('***********\n')
+      outlog.write(f'Calculating hamming distance tree and boostrapping {boot} times\n')
+      results = cd.call('ashockey/mjolnir:latest',cmd,'/data',{inputpath:"/data",treespath:"/output"})
+      outlog.write('***********\n')
   cmd = shlex.split(f"cp {treespath}/bootstrapped_nj_trees.newick {out}")
   sub.Popen(cmd).wait()
   cmd = shlex.split(f"cp {treespath}/hamming_distance_matrix.tsv {out}")
   sub.Popen(cmd).wait()
-  
+
+
 def consensusTree(out):
   logfile = os.path.join(out,'consensus.log')
   inputpath = os.path.join(out,"distanceTrees")
@@ -69,6 +67,8 @@ def boostrapSupport(out):
       outlog.write('***********\n')
   cmd = shlex.split(f"cp {supportpath}/mrc95_boostrapSupport.tree {out}")
   sub.Popen(cmd).wait()
+
+# ------------------------------------------------------
 
 def calculateHammingDistanceTree(tsvfile, out, transpose, boot):
     hammingDistanceTree(tsvfile, out, transpose, boot)
