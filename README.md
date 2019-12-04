@@ -25,7 +25,7 @@ MjolnirTree's dependencies are packaged in a [Docker container](https://github.c
 
 ### Why name it MjolnirTree?
 
-Hamming in Hamming distance sounds close to hammer. In Norse mythology, Mjolnir is the hammer of Thor, the Norse god of thunder. Hamming distances are used to produce the neighbor-joining tree, thus MjolnirTree.
+Hamming in Hamming distance sounds close to hammer. In Norse mythology, [Mjolnir](https://en.wikipedia.org/wiki/Mj%C3%B6lnir) is the hammer of Thor, the Norse god of thunder. Hamming distances are used to produce the neighbor-joining tree, thus MjolnirTree.
 
 ### License
 
