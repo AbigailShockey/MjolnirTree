@@ -27,21 +27,22 @@ def hammingDistanceTree(tsvfile, out, transpose, boot):
   with open(logfile,'a') as outlog:
       outlog.write('***********\n')
       outlog.write(f'Calculating hamming distance tree and boostrapping {boot} times\n')
-      results = cd.call('ashockey/mjolnir:latest',cmd,'/data',{inputpath:"/data",distancepath:"/output"})
+      results = cd.call('ashockey/mjolnir-tree:latest',cmd,'/data',{inputpath:"/data",distancepath:"/output"})
       outlog.write('***********\n')
   cmd = shlex.split(f"cp {distancepath}/hamming_distance_matrix.tsv {out}")
   sub.Popen(cmd).wait()
   if boot != 0:
       cmd = shlex.split(f"cp {distancepath}/bootstrapped_nj_trees.newick {out}")
       sub.Popen(cmd).wait()
-      matrixpath = os.path.join(distancepath},"matrixPermutations")
-      treepath = os.path.join(distancepath},"treePermutations")
+      matrixpath = os.path.join(f"{distancepath}","matrixPermutations")
+      treepath = os.path.join(f"{distancepath}","treePermutations")
       os.mkdir(matrixpath)
       os.mkdir(treepath)
-      cmd = shlex.split(f"mv {distancepath}/*matrix_permutation* {matrixpath}")
-      sub.Popen(cmd).wait()
-      cmd = shlex.split(f"mv {distancepath}/*tree_permutation* {treepath}")
-      sub.Popen(cmd).wait()
+      for i in range(1,(boot + 1)):
+          cmd = shlex.split(f"mv {distancepath}/matrix_permutation_{i}.tsv {matrixpath}")
+          sub.Popen(cmd).wait()
+          cmd = shlex.split(f"mv {distancepath}/tree_permutation_{i}.newick {treepath}")
+          sub.Popen(cmd).wait()
 
 def consensusTree(out):
   logfile = os.path.join(out,'consensus.log')
@@ -50,15 +51,15 @@ def consensusTree(out):
   checkexists(consensuspath)
 
   # setup command
-  cmd = f'bash -c \"sumtrees.py -s consensus -o /output/mrc95.tree -f0.95 --percentages --decimals=0 /data/bootstrapped_nj_trees.newick\"'
+  cmd = f'bash -c \"sumtrees.py -s consensus -o /output/mrc95.nexus -f0.95 --percentages --decimals=0 /data/bootstrapped_nj_trees.newick\"'
 
   # denote logs
   with open(logfile,'a') as outlog:
       outlog.write('***********\n')
       outlog.write('Calculating 95% majority rule consensus tree\n')
-      results = cd.call('ashockey/mjolnir:latest',cmd,'/data',{inputpath:"/data",consensuspath:"/output"})
+      results = cd.call('ashockey/mjolnir-tree:latest',cmd,'/data',{inputpath:"/data",consensuspath:"/output"})
       outlog.write('***********\n')
-  cmd = shlex.split(f"cp {consensuspath}/mrc95.tree {out}")
+  cmd = shlex.split(f"cp {consensuspath}/mrc95.nexus {out}")
   sub.Popen(cmd).wait()
 
 def boostrapSupport(out):
@@ -67,15 +68,15 @@ def boostrapSupport(out):
   checkexists(supportpath)
 
   # setup commands
-  cmd1 = f'bash -c \"sumtrees.py --decimals=0 -p -o /output/mrc95_boostrapSupport.tree -t /data/mrc95.tree /data/bootstrapped_nj_trees.newick\"'
-  cmd2 = f'bash -c \"nexusToNewick.py /data/mrc95_boostrapSupport.tree /output/\"'
+  cmd1 = f'bash -c \"sumtrees.py --decimals=0 -p -o /output/mrc95_boostrapSupport.nexus -t /data/mrc95.nexus /data/bootstrapped_nj_trees.newick\"'
+  cmd2 = f'bash -c \"nexusToNewick.py /data/mrc95_boostrapSupport.nexus /data/\"'
   with open(logfile,'a') as outlog:
       outlog.write('***********\n')
       outlog.write('Calculating support for nodes in the consensus tree\n')
-      results = cd.call('ashockey/mjolnir:latest',cmd1,'/data',{out:"/data",supportpath:"/output"})
+      results = cd.call('ashockey/mjolnir-tree:latest',cmd1,'/data',{out:"/data",supportpath:"/output"})
       outlog.write('***********\n')
       outlog.write('Converting nexus to newick\n')
-      results = cd.call('ashockey/mjolnir:latest',cmd2,'/data',{supportpath:"/data",supportpath:"/output"})
+      results = cd.call('ashockey/mjolnir-tree:latest',cmd2,'/data',{supportpath:"/data"})
       outlog.write('***********\n')
   cmd = shlex.split(f"cp {supportpath}/mrc95_boostrapSupport.newick {out}")
   sub.Popen(cmd).wait()
