@@ -23,6 +23,9 @@ def hammingDistanceTree(tsvfile, out, transpose, boot):
   # setup command
   cmd = f'bash -c \"hammingDistanceNJTrees.py /data/{tsv} /output/ {transpose} {boot}\"'
 
+  print("Calculating Hamming distances and constructing neighbor-joining tree")
+  print(f"Bootstrapping {boot} times")
+
   # denote logs
   with open(logfile,'a') as outlog:
       outlog.write('***********\n')
@@ -53,6 +56,8 @@ def consensusTree(out):
   # setup command
   cmd = f'bash -c \"sumtrees.py -s consensus -o /output/mrc95.nexus -f0.95 --percentages --decimals=0 /data/bootstrapped_nj_trees.newick\"'
 
+  print("Calculating 95% majority rule consensus tree")
+
   # denote logs
   with open(logfile,'a') as outlog:
       outlog.write('***********\n')
@@ -69,7 +74,13 @@ def boostrapSupport(out):
 
   # setup commands
   cmd1 = f'bash -c \"sumtrees.py --decimals=0 -p -o /output/mrc95_boostrapSupport.nexus -t /data/mrc95.nexus /data/bootstrapped_nj_trees.newick\"'
+
+  print("Calculating support for nodes in the consensus tree")
+
   cmd2 = f'bash -c \"nexusToNewick.py /data/mrc95_boostrapSupport.nexus /data/\"'
+
+  print("Converting nexus to newick")
+
   with open(logfile,'a') as outlog:
       outlog.write('***********\n')
       outlog.write('Calculating support for nodes in the consensus tree\n')
