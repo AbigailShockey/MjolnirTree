@@ -26,6 +26,10 @@ RUN wget https://raw.githubusercontent.com/AbigailShockey/MjolnirTree/master/scr
   mv hammingDistanceNJTrees.py scripts/ && \
   chmod +x scripts/hammingDistanceNJTrees.py
 
+RUN wget https://raw.githubusercontent.com/AbigailShockey/MjolnirTree/master/scripts/nexusToNewick.py && \
+  mv nexusToNewick.py scripts/ && \
+  chmod +x scripts/nexusToNewick.py
+
 ENV PATH="${PATH}:/scripts"
 
 RUN mkdir /data
