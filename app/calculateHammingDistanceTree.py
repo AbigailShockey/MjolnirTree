@@ -2,8 +2,7 @@
 
 import os,sys
 import app.callDocker as cd
-import subprocess as sub
-import shlex
+import shutil
 
 def checkexists(path):
     path = os.path.abspath(path)
@@ -32,20 +31,16 @@ def hammingDistanceTree(tsvfile, out, transpose, boot):
       outlog.write(f'Calculating hamming distance tree and boostrapping {boot} times\n')
       results = cd.call('ashockey/mjolnir-tree:latest',cmd,'/data',{inputpath:"/data",distancepath:"/output"})
       outlog.write('***********\n')
-  cmd = shlex.split(f"cp {distancepath}/hamming_distance_matrix.tsv {out}")
-  sub.Popen(cmd).wait()
+  shutil.copyfile(os.path.join(distancepath,'hamming_distance_matrix.tsv'),os.path.join(out,'hamming_distance_matrix.tsv'))
   if boot != 0:
-      cmd = shlex.split(f"cp {distancepath}/bootstrapped_nj_trees.newick {out}")
-      sub.Popen(cmd).wait()
+      shutil.copyfile(os.path.join(distancepath,'bootstrapped_nj_trees.newick'),os.path.join(out,'bootstrapped_nj_trees.newick'))
       matrixpath = os.path.join(f"{distancepath}","matrixPermutations")
       treepath = os.path.join(f"{distancepath}","treePermutations")
       os.mkdir(matrixpath)
       os.mkdir(treepath)
       for i in range(1,(boot + 1)):
-          cmd = shlex.split(f"mv {distancepath}/matrix_permutation_{i}.tsv {matrixpath}")
-          sub.Popen(cmd).wait()
-          cmd = shlex.split(f"mv {distancepath}/tree_permutation_{i}.newick {treepath}")
-          sub.Popen(cmd).wait()
+          shutil.move(os.path.join(distancepath,f'matrix_permutation_{i}.tsv'),os.path.join(matrixpath,f'matrix_permutation_{i}.tsv'))
+          shutil.move(os.path.join(distancepath,f'tree_permutation_{i}.newick'),os.path.join(treepath,f'tree_permutation_{i}.newick'))
 
 def consensusTree(out):
   logfile = os.path.join(out,'consensus.log')
@@ -64,8 +59,7 @@ def consensusTree(out):
       outlog.write('Calculating 95% majority rule consensus tree\n')
       results = cd.call('ashockey/mjolnir-tree:latest',cmd,'/data',{inputpath:"/data",consensuspath:"/output"})
       outlog.write('***********\n')
-  cmd = shlex.split(f"cp {consensuspath}/mrc95.nexus {out}")
-  sub.Popen(cmd).wait()
+  shutil.copyfile(os.path.join(consensuspath,'mrc95.nexus'),os.path.join(out,'mrc95.nexus'))
 
 def boostrapSupport(out):
   logfile = os.path.join(out,'support.log')
@@ -89,8 +83,7 @@ def boostrapSupport(out):
       outlog.write('Converting nexus to newick\n')
       results = cd.call('ashockey/mjolnir-tree:latest',cmd2,'/data',{supportpath:"/data"})
       outlog.write('***********\n')
-  cmd = shlex.split(f"cp {supportpath}/mrc95_boostrapSupport.newick {out}")
-  sub.Popen(cmd).wait()
+  shutil.copyfile(os.path.join(supportpath,'mrc95_boostrapSupport.newick'),os.path.join(out,'mrc95_boostrapSupport.newick'))
 
 # ------------------------------------------------------
 
