@@ -4,6 +4,7 @@ import os,sys
 import app.callDocker as cd
 import subprocess as sub
 import shlex
+import dendropy
 
 def checkexists(path):
     path = os.path.abspath(path)
@@ -22,7 +23,7 @@ def hammingDistanceTree(tsvfile, out, transpose, boot):
 
   # setup command
   cmd = f'bash -c \"hammingDistanceNJTrees.py /data/{tsv} /output/ {transpose} {boot}\"'
- 
+
   # denote logs
   with open(logfile,'a') as outlog:
       outlog.write('***********\n')
@@ -34,8 +35,14 @@ def hammingDistanceTree(tsvfile, out, transpose, boot):
   if boot != 0:
       cmd = shlex.split(f"cp {distancepath}/bootstrapped_nj_trees.newick {out}")
       sub.Popen(cmd).wait()
-
-
+      matrixpath = os.path.join(distancepath},"matrixPermutations")
+      treepath = os.path.join(distancepath},"treePermutations")
+      os.mkdir(matrixpath)
+      os.mkdir(treepath)
+      cmd = shlex.split(f"mv {distancepath}/*matrix_permutation* {matrixpath}")
+      sub.Popen(cmd).wait()
+      cmd = shlex.split(f"mv {distancepath}/*tree_permutation* {treepath}")
+      sub.Popen(cmd).wait()
 
 def consensusTree(out):
   logfile = os.path.join(out,'consensus.log')
@@ -60,14 +67,18 @@ def boostrapSupport(out):
   supportpath = os.path.join(out,"bootstrapSupport")
   checkexists(supportpath)
 
-  # setup command
-  cmd = f'bash -c \"sumtrees.py --decimals=0 -p -o /output/mrc95_boostrapSupport.tree -t /data/mrc95.tree /data/bootstrapped_nj_trees.newick\"'
+  # setup commands
+  cmd1 = f'bash -c \"sumtrees.py --decimals=0 -p -o /output/mrc95_boostrapSupport.tree -t /data/mrc95.tree /data/bootstrapped_nj_trees.newick\"'
+  cmd2 = f'bash -c \"nexusToNewick.py /data/mrc95_boostrapSupport.tree /output/\"'
   with open(logfile,'a') as outlog:
       outlog.write('***********\n')
       outlog.write('Calculating support for nodes in the consensus tree\n')
-      results = cd.call('ashockey/mjolnir:latest',cmd,'/data',{out:"/data",supportpath:"/output"})
+      results = cd.call('ashockey/mjolnir:latest',cmd1,'/data',{out:"/data",supportpath:"/output"})
       outlog.write('***********\n')
-  cmd = shlex.split(f"cp {supportpath}/mrc95_boostrapSupport.tree {out}")
+      outlog.write('Converting nexus to newick\n')
+      results = cd.call('ashockey/mjolnir:latest',cmd2,'/data',{supportpath:"/data",supportpath:"/output"})
+      outlog.write('***********\n')
+  cmd = shlex.split(f"cp {supportpath}/mrc95_boostrapSupport.newick {out}")
   sub.Popen(cmd).wait()
 
 # ------------------------------------------------------
