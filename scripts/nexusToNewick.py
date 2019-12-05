@@ -20,7 +20,7 @@ parser.add_argument('out', type=str, help="Output directory")
 
 args = parser.parse_args()
 
-treeFile = os.path.abspath(args.nex)
+treeFile = os.path.abspath(args.nexus)
 out = args.out
 
 newickHandle = os.path.basename(treeFile).split(".")[0] + ".newick"
