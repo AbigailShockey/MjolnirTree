@@ -22,9 +22,9 @@ RUN python3 -m pip install -U dendropy pandas scipy numpy docker
 
 RUN mkdir scripts
 
-RUN wget https://raw.githubusercontent.com/AbigailShockey/MjolnirTree/master/scripts/hammingDistanceTrees.py && \
-  mv hammingDistanceTrees.py scripts/ && \
-  chmod +x scripts/hammingDistanceTrees.py
+RUN wget https://raw.githubusercontent.com/AbigailShockey/MjolnirTree/master/scripts/hammingDistanceNJTrees.py && \
+  mv hammingDistanceNJTrees.py scripts/ && \
+  chmod +x scripts/hammingDistanceNJTrees.py
 
 ENV PATH="${PATH}:/scripts"
 
