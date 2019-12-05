@@ -4,7 +4,6 @@ import os,sys
 import app.callDocker as cd
 import subprocess as sub
 import shlex
-import dendropy
 
 def checkexists(path):
     path = os.path.abspath(path)
