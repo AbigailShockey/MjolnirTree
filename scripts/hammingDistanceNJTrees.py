@@ -91,7 +91,7 @@ if args.boot != 0:
         rdf = df[rcols]
         
         # randomly re-order tsv rows (see "jumble" option in boot.phylo function from R package ape)
-        rdf = rdf.sample(frac=1, replace=False)
+#        rdf = rdf.sample(frac=1, replace=False)
         
         # permuted hdm name and path
         rMatrixOut = os.path.join(out,f"matrix_permutation_{i}.tsv")
